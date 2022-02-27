@@ -1,4 +1,4 @@
-package com.quokkaman.ratinbbar
+package com.quokkaman.ratingbar
 
 import androidx.annotation.FloatRange
 import androidx.compose.runtime.Stable

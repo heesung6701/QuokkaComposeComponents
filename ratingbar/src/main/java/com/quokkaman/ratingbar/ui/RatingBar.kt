@@ -1,4 +1,4 @@
-package com.quokkaman.ratinbbar.ui
+package com.quokkaman.ratingbar.ui
 
 import android.util.Log
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
@@ -13,7 +13,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.quokkaman.ratinbbar.data.RatingBarState
+import com.quokkaman.ratingbar.data.RatingBarState
 import kotlin.math.floor
 
 const val LOG_TAG = "RatingBar"

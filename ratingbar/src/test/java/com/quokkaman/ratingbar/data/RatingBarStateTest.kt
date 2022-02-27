@@ -1,6 +1,7 @@
-package com.quokkaman.ratinbbar.data
+package com.quokkaman.ratingbar.data
 
-import com.quokkaman.ratinbbar.error.UnSupportStepSizeException
+import com.quokkaman.ratingbar.UnSupportInitialRatingException
+import com.quokkaman.ratingbar.UnSupportStepSizeException
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertThrows
 import org.junit.Test
@@ -31,6 +32,17 @@ class RatingBarStateTest {
                 maxRating = 3,
                 stepSize = 0.3f,
                 initialRating = 1.5f
+            )
+        }
+    }
+
+    @Test
+    fun unSupportInitialRatingTest() {
+        assertThrows(UnSupportInitialRatingException::class.java) {
+            RatingBarState(
+                maxRating = 3,
+                stepSize = 0.5f,
+                initialRating = 1.4f
             )
         }
     }

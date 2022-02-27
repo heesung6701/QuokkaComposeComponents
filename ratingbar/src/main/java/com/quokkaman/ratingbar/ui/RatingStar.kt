@@ -1,4 +1,4 @@
-package com.quokkaman.ratinbbar.ui
+package com.quokkaman.ratingbar.ui
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.FloatRange
@@ -15,8 +15,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.quokkaman.ratinbbar.FractionalRectangleShape
-import com.quokkaman.ratinbbar.R
+import com.quokkaman.ratingbar.FractionalRectangleShape
 
 @Composable
 fun RatingStar(
