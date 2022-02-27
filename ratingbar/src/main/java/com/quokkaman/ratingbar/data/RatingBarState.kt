@@ -2,7 +2,8 @@ package com.quokkaman.ratinbbar.data
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import com.quokkaman.ratinbbar.error.UnSupportStepSizeException
+import com.quokkaman.ratingbar.UnSupportInitialRatingException
+import com.quokkaman.ratingbar.UnSupportStepSizeException
 
 data class RatingBarState(
     val initialRating: Float = 0f,
@@ -17,6 +18,10 @@ data class RatingBarState(
     init {
         if (invertStepSize * stepSize != 1.0f) {
             throw UnSupportStepSizeException(stepSize)
+        }
+
+        if ((initialRating / stepSize).toInt().toFloat() != initialRating / stepSize) {
+            throw UnSupportInitialRatingException(initialRating, stepSize)
         }
     }
 
