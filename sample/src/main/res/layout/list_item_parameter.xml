@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/layout_text_parameter"
+        android:id="@+id/layout_text_parameter"
+        />
+
+    <include
+        layout="@layout/layout_switch_parameter"
+        android:id="@+id/layout_switch_parameter"
+        />
+
+    <include
+        layout="@layout/layout_seekbar_parameter"
+        android:id="@+id/layout_seekbar_parameter"
+        />
+
+</LinearLayout>
