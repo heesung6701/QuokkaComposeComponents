@@ -114,8 +114,8 @@ fun RatingBarPreview() {
                 Box(modifier = Modifier.height(24.dp)) {
                     RatingBar(ratingBarState = RatingBarState(
                         maxRating = 3,
-                        stepSize = 0.3f,
-                        initialRating = 1.8f,
+                        stepSize = 0.25f,
+                        initialRating = 2.25f,
                         onRatingChange = {
                             Log.d(LOG_TAG, "Second RatingBar ratio :$it")
                         }
