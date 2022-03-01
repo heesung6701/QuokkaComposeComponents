@@ -9,6 +9,7 @@ data class RatingBarState(
     val initialRating: Float = 0f,
     val maxRating: Int = 5,
     val stepSize: Float = 1f,
+    var isIndicator: Boolean = false,
     val onRatingChange: (Float) -> Unit = {}
 ) {
     val rating: MutableState<Float> = mutableStateOf(initialRating)

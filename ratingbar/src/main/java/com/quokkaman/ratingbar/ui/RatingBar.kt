@@ -26,6 +26,7 @@ const val LOG_TAG = "RatingBar"
 @Composable
 fun RatingBar(ratingBarState: RatingBarState) {
     var width by remember { mutableStateOf(0) }
+    val rating by ratingBarState.rating
 
     Row(modifier = Modifier
         .onSizeChanged {
@@ -36,13 +37,25 @@ fun RatingBar(ratingBarState: RatingBarState) {
         ) {
             detectHorizontalDragGestures(
                 onDragEnd = {
+                    if (ratingBarState.isIndicator) {
+                        return@detectHorizontalDragGestures
+                    }
                     ratingBarState.onRatingChange(ratingBarState.rating.value)
                 },
                 onDragCancel = {
+                    if (ratingBarState.isIndicator) {
+                        return@detectHorizontalDragGestures
+                    }
                 },
                 onDragStart = {
+                    if (ratingBarState.isIndicator) {
+                        return@detectHorizontalDragGestures
+                    }
                 },
                 onHorizontalDrag = { change, _ ->
+                    if (ratingBarState.isIndicator) {
+                        return@detectHorizontalDragGestures
+                    }
                     change.consumeAllChanges()
                     val newRating = calculateRating(change.position.x, width, ratingBarState.maxRating)
                     ratingBarState.updateRating(newRating)
@@ -50,6 +63,9 @@ fun RatingBar(ratingBarState: RatingBarState) {
             )
         }
         .pointerInteropFilter {
+            if (ratingBarState.isIndicator) {
+                return@pointerInteropFilter true
+            }
             when (it.action) {
                 MotionEvent.ACTION_DOWN -> {
                     val newRating = calculateRating(it.x, width, ratingBarState.maxRating)
@@ -59,18 +75,17 @@ fun RatingBar(ratingBarState: RatingBarState) {
             true
         }
     ) {
-        RatingStars(ratingBarState)
+        RatingStars(rating, ratingBarState.maxRating)
     }
 }
 
 @Composable
-fun RatingStars(ratingBarState: RatingBarState) {
-    val progress by ratingBarState.rating
+fun RatingStars(rating: Float, maxRating: Int) {
     Row {
-        for (i in 1..ratingBarState.maxRating) {
-            val floatingPoint = progress - (i - 1)
-            val rating = when {
-                i <= floor(progress) -> {
+        for (i in 1..maxRating) {
+            val floatingPoint = rating - (i - 1)
+            val ratingEach = when {
+                i <= floor(rating) -> {
                     1.0f
                 }
                 0 < floatingPoint && floatingPoint < 1 -> {
@@ -85,7 +100,7 @@ fun RatingStars(ratingBarState: RatingBarState) {
                     .size(24.dp)
             ) {
                 RatingStar(
-                    rating = rating
+                    rating = ratingEach
                 )
             }
         }
@@ -126,6 +141,7 @@ fun RatingBarPreview() {
                         maxRating = 10,
                         stepSize = 0.5f,
                         initialRating = 2.5f,
+                        isIndicator = true,
                         onRatingChange = {
                             Log.d(LOG_TAG, "Third RatingBar ratio :$it")
                         }
