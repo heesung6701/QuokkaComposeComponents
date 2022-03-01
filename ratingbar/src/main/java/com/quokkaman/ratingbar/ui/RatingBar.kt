@@ -1,23 +1,28 @@
 package com.quokkaman.ratingbar.ui
 
 import android.util.Log
+import android.view.MotionEvent
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.*
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.consumeAllChanges
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.input.pointer.pointerInteropFilter
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.quokkaman.ratingbar.calculateRating
 import com.quokkaman.ratingbar.data.RatingBarState
 import kotlin.math.floor
 
 const val LOG_TAG = "RatingBar"
 
+@ExperimentalComposeUiApi
 @Composable
 fun RatingBar(ratingBarState: RatingBarState) {
     var width by remember { mutableStateOf(0) }
@@ -39,12 +44,21 @@ fun RatingBar(ratingBarState: RatingBarState) {
                 },
                 onHorizontalDrag = { change, _ ->
                     change.consumeAllChanges()
-                    val ratio = (change.position.x / width).coerceIn(0f, 1.0f)
-                    val progress = ratio * ratingBarState.maxRating
-                    ratingBarState.updateRating(progress)
+                    val newRating = calculateRating(change.position.x, width, ratingBarState.maxRating)
+                    ratingBarState.updateRating(newRating)
                 }
             )
-        }) {
+        }
+        .pointerInteropFilter {
+            when (it.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    val newRating = calculateRating(it.x, width, ratingBarState.maxRating)
+                    ratingBarState.updateRating(newRating)
+                }
+            }
+            true
+        }
+    ) {
         RatingStars(ratingBarState)
     }
 }
@@ -78,6 +92,7 @@ fun RatingStars(ratingBarState: RatingBarState) {
     }
 }
 
+@ExperimentalComposeUiApi
 @Preview
 @Composable
 fun RatingBarPreview() {
