@@ -16,3 +16,4 @@ rootProject.name = "QuokkaComposeComponents"
 include ':app'
 include ':ratingbar'
 include ':sample'
+enableFeaturePreview("VERSION_CATALOGS")
