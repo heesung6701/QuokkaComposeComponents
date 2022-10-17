@@ -1,4 +1,4 @@
-package com.example.components
+package com.quokkaman.components
 
 import org.junit.Test
 

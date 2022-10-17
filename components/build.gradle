@@ -4,8 +4,8 @@ plugins {
 }
 
 android {
-    namespace 'com.example.components'
-    compileSdk 32
+    namespace 'com.quokkaman.components'
+    compileSdk rootProject.ext.compileSdkVersion
 
     defaultConfig {
         minSdk 24

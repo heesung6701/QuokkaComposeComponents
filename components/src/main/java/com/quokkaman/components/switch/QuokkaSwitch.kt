@@ -1,4 +1,4 @@
-package com.example.components.switch
+package com.quokkaman.components.switch
 
 import androidx.compose.runtime.Composable
 
