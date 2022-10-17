@@ -1,9 +1,9 @@
 buildscript {
     ext {
-        compileSdkVersion = 31
-        targetSdkVersion = 31
-        minSdkVersion = 21
-        kotlinCompilerExtensionVersion = "1.0.5"
+        compileSdkVersion = 33
+        targetSdkVersion = 33
+        minSdkVersion = 24
+        kotlinCompilerExtensionVersion = "1.3.0-beta01"
     }
 
     dependencies {
